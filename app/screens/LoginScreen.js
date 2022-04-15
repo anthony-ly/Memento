@@ -61,7 +61,7 @@ function LoginScreen(props) {
                             />
                             {touched.password && < AppText style={{ color: "red" }}>{errors.password}</AppText>}
 
-                            <AppButton style={styles.button} title="Login" color="secondaryColor" onPress={handleSubmit} />
+                            <AppButton title="Login" color="secondaryColor" onPress={handleSubmit} />
                         </View >
 
 

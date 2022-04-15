@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, ImageBackground, Platform, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native';
 
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton';
 import AppColors from '../config/AppColors';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
     return (
         <AppScreen>
             <View style={styles.banner}>
@@ -20,9 +21,9 @@ function WelcomeScreen(props) {
 
             <View style={styles.buttonContainer}>
                 {/* <AppButton title="Login" onPress={() => navigation.navigate("Login")} /> */}
-                <AppButton title="Login" color="secondaryColor" onPress={() => console.log("Login")} />
+                <AppButton title="Login" color="secondaryColor" onPress={() => navigation.navigate("Login")} />
                 {/* <AppButton title="Register" color="secondaryColor" onPress={() => navigation.navigate("Register")} /> */}
-                <AppButton title="Register" text="white" color="otherColor" onPress={() => console.log("Register")} />
+                <AppButton title="Register" text="white" color="otherColor" onPress={() => navigation.navigate("Register")} />
             </View>
         </AppScreen>
     );

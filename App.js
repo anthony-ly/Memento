@@ -5,12 +5,14 @@ import AppButton from './app/components/AppButton';
 import AppScreen from './app/components/AppScreen';
 import AppText from './app/components/AppText';
 import AppColors from './app/config/AppColors';
+import LoginScreen from './app/screens/LoginScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
 export default function App() {
   return (
 
-    <WelcomeScreen />
+    // <WelcomeScreen />
+    <LoginScreen />
 
   );
 }

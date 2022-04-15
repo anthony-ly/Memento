@@ -23,11 +23,13 @@ function LoginScreen(props) {
 
     return (
         <AppScreen style={styles.container}>
+            {/* top section */}
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
-                    name="library"
+                    name="camera"
                     size={60}
-                    color={AppColors.primaryColor} />
+                    color={AppColors.otherColor} />
+                <AppText style={{ fontSize: "50", fontWeight: "bold", marginTop: 20 }}>Login</AppText>
             </View>
 
             <Formik
@@ -58,8 +60,11 @@ function LoginScreen(props) {
                                 onChangeText={handleChange("password")}
                             />
                             {touched.password && < AppText style={{ color: "red" }}>{errors.password}</AppText>}
+
+                            <AppButton style={styles.button} title="Login" color="secondaryColor" onPress={handleSubmit} />
                         </View >
-                        <AppButton title="Login" onPress={handleSubmit} />
+
+
                     </>
                 )}
             </Formik>
@@ -74,7 +79,7 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: AppColors.otherColor,
+        backgroundColor: AppColors.primaryColor,
         padding: 25,
     },
 
@@ -82,11 +87,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 50,
+        marginBottom: 100,
     },
 
     textInputContainer: {
-        marginTop: 75,
-    }
+        // marginTop: 200,
+        // flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 })
 
 export default LoginScreen;

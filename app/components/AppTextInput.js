@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import AppColors from '../config/AppColors';
 function AppTextInput({ icon, ...otherProps }) {
     return (
         <View style={styles.container}>
@@ -12,17 +13,17 @@ function AppTextInput({ icon, ...otherProps }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#e0e0eb",
+        backgroundColor: AppColors.white,
         flexDirection: "row",
-        borderRadius: 25,
+        borderRadius: 10,
         padding: 10,
         marginVertical: 10,
-        width: '100%'
+        width: '80%'
     },
 
     textInput: {
         fontSize: 20,
-        fontFamily: Platform.OS === 'android' ? "monospace" : "Cochin",
+        // fontFamily: Platform.OS === 'android' ? "monospace" : "Cochin",
         color: "#000",
         marginLeft: 10,
         flex: 1,

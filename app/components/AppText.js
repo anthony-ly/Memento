@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, StyleSheet, Platform } from 'react-native';
 
-function AppText({ children }) {
+function AppText({ children, style }) {
     return (
-        <Text style={styles.text}>
+        <Text style={[styles.text, style]}>
             {children}
         </Text>
     );
@@ -12,7 +12,7 @@ function AppText({ children }) {
 const styles = StyleSheet.create({
     text: {
         fontSize: 20,
-        fontFamily: Platform.OS === 'android' ? "Roboto" : "SF Pro"
+        // fontFamily: Platform.OS === 'android' ? "Roboto" : "SF Pro"
     }
 })
 

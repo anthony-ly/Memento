@@ -7,7 +7,9 @@ function AppScreen({ children, style }) {
     return (
         <View style={styles.background}>
             <SafeAreaView style={[styles.screen, style]}>
-                {children}
+                <View style={styles.paddingView}>
+                    {children}
+                </View>
             </SafeAreaView>
         </View>
 
@@ -23,6 +25,9 @@ const styles = StyleSheet.create({
         marginTop: Constants.statusBarHeight,
         // backgroundColor: AppColors.primaryColor,
     },
+    paddingView: {
+        padding: 20,
+    }
 })
 
 export default AppScreen;

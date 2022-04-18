@@ -11,8 +11,8 @@ export default function App() {
   return (
 
     // <NavigationContainer>
-    /* <AuthNavigator /> */
-    /* </NavigationContainer> */
+    // <AuthNavigator />
+    // </NavigationContainer>
     // <MemoryScreen></MemoryScreen>
     <NewMemoryScreen>
     </NewMemoryScreen>

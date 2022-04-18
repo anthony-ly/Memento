@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button } from 'react-native';
+
+import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+
 import AppColors from '../config/AppColors';
 import AppText from './AppText';
 import AppScreen from './AppScreen';
-function AppPicker({ icon, placeholder, ...otherProps }) {
+import AppPickerItem from './AppPickerItem';
+
+function AppPicker({ data, icon, placeholder, selectedItem, onSelectItem }) {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <>
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
                 <View style={styles.container}>
                     {icon && <MaterialCommunityIcons name={icon} size={24} />}
-                    <AppText style={styles.text}> {placeholder} </AppText>
+                    <AppText style={styles.text}> {selectedItem ? selectedItem.label : placeholder} </AppText>
                     <MaterialCommunityIcons name="chevron-down" size={24} />
                 </View>
             </TouchableWithoutFeedback>
@@ -19,6 +23,19 @@ function AppPicker({ icon, placeholder, ...otherProps }) {
             <Modal visible={modalVisible} animationType="slide">
                 <AppScreen>
                     <Button title="Close" onPress={() => setModalVisible(false)}></Button>
+                    <FlatList
+                        data={data}
+                        keyExtractor={item => item.value.toString()}
+                        renderItem={({ item }) =>
+                            <AppPickerItem
+                                icon={item.icon}
+                                label={item.label}
+                                backgroundColor={item.backgroundColor}
+                                onPress={() => {
+                                    setModalVisible(false);
+                                    onSelectItem(item);
+                                }} />}
+                    />
                 </AppScreen>
             </Modal>
         </>

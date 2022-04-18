@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.secondaryColor,
         borderRadius: 20,
         overflow: 'hidden',
+        marginBottom: 20,
     },
     text: {
         paddingLeft: 20,
+        paddingBottom: 10,
     },
     image: {
         height: 200,

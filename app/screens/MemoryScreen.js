@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import AppCard from '../components/AppCard';
 import AppScreen from '../components/AppScreen';
+import AppText from '../components/AppText';
 import AppColors from '../config/AppColors';
 
 const memoryData = [
@@ -23,6 +24,7 @@ function MemoryScreen(props) {
             {/* <AppCard
                 title="deez"
                 subtitle="nuts" /> */}
+            <AppText style={styles.tester}>My Memories</AppText>
             <FlatList
                 data={memoryData}
                 keyExtractor={memory => memory.id.toString()}
@@ -37,6 +39,12 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: AppColors.primaryColor,
         flex: 1,
+    },
+    tester: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 20,
     }
 })
 export default MemoryScreen;

@@ -17,10 +17,26 @@ const schema = Yup.object().shape(
     }
 );
 
-function LoginScreen(props) {
+const users = [
+    {
+        name: "tester1",
+        email: "test1@mail.com",
+        password: "1234"
+    },
+    {
+        name: "tester2",
+        email: "test2@mail.com",
+        password: "5678"
+    },
+];
 
+const validateUser = ({ email, password }) => {
+    return (
+        users.filter((user) => user.email === email && user.password === password).length > 0
+    );
+}
 
-
+function LoginScreen({ navigation }) {
     return (
         <AppScreen style={styles.container}>
             {/* top section */}
@@ -34,10 +50,19 @@ function LoginScreen(props) {
 
             <Formik
                 initialValues={{ email: '', password: '', }}
-                onSubmit={values => console.log(values)}
+                onSubmit={(values, { resetForm }) => {
+                    if (validateUser(values)) {
+                        console.log(values);
+                        resetForm();
+                        navigation.navigate("My Memories")
+                    } else {
+                        resetForm();
+                        alert("Invalid Login Details")
+                    }
+                }}
                 validationSchema={schema}
             >
-                {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
+                {({ values, handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <>
                         <View style={styles.textInputContainer}>
                             <AppTextInput
@@ -46,6 +71,7 @@ function LoginScreen(props) {
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 keyboardType="email-address"
+                                value={values.email}
                                 onBlur={() => setFieldTouched("email")}
                                 onChangeText={handleChange("email")}
                             />
@@ -56,6 +82,7 @@ function LoginScreen(props) {
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 secureTextEntry={true}
+                                value={values.password}
                                 onBlur={() => setFieldTouched("password")}
                                 onChangeText={handleChange("password")}
                             />
@@ -68,11 +95,7 @@ function LoginScreen(props) {
                     </>
                 )}
             </Formik>
-
-
         </AppScreen >
-
-
     );
 }
 

@@ -4,16 +4,17 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import AuthNavigator from './app/navigation/AuthNavigator';
 import MemoryScreen from './app/screens/MemoryScreen';
+import NewMemoryScreen from './app/screens/NewMemoryScreen';
 
 
 export default function App() {
   return (
 
     // <NavigationContainer>
-    //   <AuthNavigator />
-    // </NavigationContainer>
-    <MemoryScreen></MemoryScreen>
-
+    /* <AuthNavigator /> */
+    /* </NavigationContainer> */
+    // <MemoryScreen></MemoryScreen>
+    <NewMemoryScreen></NewMemoryScreen>
   );
 }
 

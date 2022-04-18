@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     screen: {
         flex: 1,
-        marginTop: Constants.statusBarHeight,
+        // marginTop: Constants.statusBarHeight, // TODO this is here so stuff doesn't go into the status bar
         // backgroundColor: AppColors.primaryColor,
     },
     paddingView: {

@@ -20,7 +20,7 @@ function NewMemoryScreen(props) {
                 onSelectItem={item => setCategory(item)}
                 data={categories}
                 icon="apps"
-                placeholder="Categories"></AppPicker>
+                placeholder="Categories" />
         </AppScreen>
     );
 }

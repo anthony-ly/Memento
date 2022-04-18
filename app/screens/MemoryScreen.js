@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import AppCard from '../components/AppCard';
 import AppPicker from '../components/AppPicker';
@@ -19,11 +19,23 @@ const memoryData = [
     }
 ]
 
+const categories = [
+    { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
+    { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
+    { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
+];
+
 function MemoryScreen(props) {
+    const [category, setCategory] = useState();
     return (
         <AppScreen>
             <AppText style={styles.tester}>My Memories</AppText>
-            <AppPicker icon="apps" placeholder="Categories"></AppPicker>
+            <AppPicker
+                selectedItem={category}
+                onSelectItem={item => setCategory(item)}
+                data={categories}
+                icon="apps"
+                placeholder="Categories" />
             <FlatList
                 data={memoryData}
                 keyExtractor={memory => memory.id.toString()}

@@ -14,7 +14,8 @@ export default function App() {
     /* <AuthNavigator /> */
     /* </NavigationContainer> */
     // <MemoryScreen></MemoryScreen>
-    <NewMemoryScreen></NewMemoryScreen>
+    <NewMemoryScreen>
+    </NewMemoryScreen>
   );
 }
 

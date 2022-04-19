@@ -6,6 +6,7 @@ import AppColors from '../config/AppColors';
 import AppIcon from '../components/AppIcon';
 import AppListItem from '../components/AppListItem';
 import AppScreen from '../components/AppScreen';
+import AppText from '../components/AppText';
 
 
 function AccountScreen({ navigation, route }) {
@@ -17,10 +18,11 @@ function AccountScreen({ navigation, route }) {
                     name="camera"
                     size={60}
                     color={AppColors.otherColor} />
+                <AppText>Welcome back, {route.params.paramName}!</AppText>
             </View>
             <View style={styles.profileContainer}>
                 {/* <AppListItem image={route.params.paramImage} title={route.params.paramName} subtitle={route.params.paramEmail}/> */}
-                <AppListItem title="bruh" subtitle="yeet" />
+                <AppListItem title={route.params.paramName} subtitle={route.params.paramEmail} />
             </View>
             {/* <View style={styles.linksContainer}>  */}
             {/* <AppListItem title="My Books" IconComponent={<AppIcon name="book-open-variant" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("Books")} /> */}

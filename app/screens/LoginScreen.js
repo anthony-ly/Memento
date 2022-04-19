@@ -19,11 +19,13 @@ const schema = Yup.object().shape(
 
 const users = [
     {
+        id: "1",
         name: "tester1",
         email: "test1@mail.com",
         password: "1234"
     },
     {
+        id: "2",
         name: "tester2",
         email: "test2@mail.com",
         password: "5678"
@@ -34,6 +36,13 @@ const validateUser = ({ email, password }) => {
     return (
         users.filter((user) => user.email === email && user.password === password).length > 0
     );
+}
+
+const getUser = ({ email }) => {
+    // let commonData = DataManager.getInstance();
+    // let userID = getUser({email}).id;
+    // commonData.setUserID(userID);
+    return users.find((user) => user.email === email);
 }
 
 function LoginScreen({ navigation }) {
@@ -52,9 +61,17 @@ function LoginScreen({ navigation }) {
                 initialValues={{ email: '', password: '', }}
                 onSubmit={(values, { resetForm }) => {
                     if (validateUser(values)) {
-                        console.log(values);
+                        console.log(getUser(values).name);
                         resetForm();
-                        navigation.navigate("My Memories")
+                        navigation.navigate("My Memories", {
+                            screen: "Account",
+                            params: {
+                                paramEmail: values.email,
+                                paramName: getUser(values).name
+                                // TODO get image as well
+                            }
+                        }
+                        )
                     } else {
                         resetForm();
                         alert("Invalid Login Details")

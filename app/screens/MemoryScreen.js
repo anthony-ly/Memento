@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     list: {
-        backgroundColor: 'blue'
+        // backgroundColor: 'blue'
     }
 })
 export default MemoryScreen;

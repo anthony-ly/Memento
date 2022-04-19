@@ -5,6 +5,7 @@ import MemoryScreen from '../screens/MemoryScreen';
 import NewMemoryScreen from '../screens/NewMemoryScreen';
 import AppColors from '../config/AppColors';
 import AccountScreen from '../screens/AccountScreen';
+import AppIcon from '../components/AppIcon';
 
 const AppTab = createBottomTabNavigator();
 
@@ -19,9 +20,9 @@ const TabNavigator = () => (
             null
         ]
     }}>
-        <AppTab.Screen name="Account" component={AccountScreen} />
-        <AppTab.Screen name="Add Memory" component={NewMemoryScreen} />
-        <AppTab.Screen name="Memories" component={MemoryScreen} />
+        <AppTab.Screen name="Account" component={AccountScreen} options={{ tabBarIcon: () => <AppIcon size={30} name="home" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} /> }} />
+        <AppTab.Screen name="Add Memory" component={NewMemoryScreen} options={{ tabBarIcon: () => <AppIcon size={30} name="plus-circle" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} /> }} />
+        <AppTab.Screen name="Memories" component={MemoryScreen} options={{ tabBarIcon: () => <AppIcon size={30} name="camera" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} /> }} />
 
 
     </AppTab.Navigator >

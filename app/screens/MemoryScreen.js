@@ -41,7 +41,6 @@ function MemoryScreen(props) {
                 keyExtractor={memory => memory.id.toString()}
                 renderItem={
                     ({ item }) => <AppCard title={item.title} subtitle={item.subtitle} />} />
-
         </AppScreen>
     );
 }

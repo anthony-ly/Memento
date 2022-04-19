@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     profileContainer: {
         marginTop: 50,
         height: 90,
-        backgroundColor: AppColors.otherColorLite,
+        backgroundColor: AppColors.secondaryColor,
         justifyContent: "center",
     },
     linksContainer: {

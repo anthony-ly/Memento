@@ -6,20 +6,21 @@ import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
 import AppColors from '../config/AppColors';
+import DataManager from '../config/DataManager';
 
 
-const memoryData = [
-    {
-        id: 1,
-        title: "deez nuts",
-        subtitle: "rick roll",
-    },
-    {
-        id: 2,
-        title: "joe mama",
-        subtitle: "ok"
-    }
-]
+// const memoryData = [
+//     {
+//         id: 1,
+//         title: "Family",
+//         subtitle: "date",
+//     },
+//     {
+//         id: 2,
+//         title: "Friends",
+//         subtitle: "date"
+//     }
+// ]
 
 const categories = [
     { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
@@ -27,14 +28,22 @@ const categories = [
     { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
 ];
 
+const getMemory = () => {
+    let commonData = DataManager.getInstance();
+    let user = commonData.getUserID();
+    return commonData.getMemories(user);
+}
+
 function MemoryScreen(props) {
-    const [category, setCategory] = useState(); // filter
+    const memoryList = getMemory();
+
+    const [category, setCategory] = useState(); // filter values for categories
 
     const [refreshing, setRefreshing] = useState(false);
-    const [memories, setMemories] = useState(memoryData);
+    const [memories, setMemories] = useState(memoryList);
 
     const handleDelete = (memory) => {
-        const newMemoryList = memories.filter(item => item.id !== memory.id);
+        const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid);
         setMemories(newMemoryList);
     }
 
@@ -50,9 +59,9 @@ function MemoryScreen(props) {
             <FlatList
                 style={styles.list}
                 data={memories}
-                keyExtractor={memory => memory.id.toString()}
+                keyExtractor={memory => memory.memoryid.toString()}
                 refreshing={refreshing}
-                onRefresh={() => setMemories(memoryData)}
+                onRefresh={() => setMemories(memoryList)}
                 renderItem={({ item }) =>
                     <AppCard
                         title={item.title}
@@ -60,7 +69,8 @@ function MemoryScreen(props) {
                         onPress={() => console.log(item)}
                         onSwipeLeft={() => (
                             <View style={styles.deleteView}>
-                                <TouchableOpacity onPress={() => handleDelete(item)}>
+                                <TouchableOpacity onPress={() => handleDelete(item)}
+                                >
                                     <AppIcon name="trash-can" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} />
                                 </TouchableOpacity>
                             </View>)} />} />

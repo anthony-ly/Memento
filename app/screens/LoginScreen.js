@@ -9,6 +9,8 @@ import AppScreen from '../components/AppScreen';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
+import DataManager from '../config/DataManager';
+
 
 const schema = Yup.object().shape(
     {
@@ -45,6 +47,12 @@ const getUser = ({ email }) => {
     return users.find((user) => user.email === email);
 }
 
+const createUser = ({ email }) => {
+    let commonData = DataManager.getInstance();
+    let userID = getUser({ email }).id;
+    commonData.setUserID(userID);
+}
+
 function LoginScreen({ navigation }) {
     return (
         <AppScreen style={styles.container}>
@@ -61,8 +69,8 @@ function LoginScreen({ navigation }) {
                 initialValues={{ email: '', password: '', }}
                 onSubmit={(values, { resetForm }) => {
                     if (validateUser(values)) {
-                        console.log(getUser(values).name);
                         resetForm();
+                        createUser(values);
                         navigation.navigate("My Memories", {
                             screen: "Account",
                             params: {

@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
 import AppColors from '../config/AppColors';
 import AppText from '../components/AppText'
 
-function AppCard({ title, subtitle, image, onPress }) {
+function AppCard({ title, subtitle, image, onPress, onSwipeLeft }) {
     return (
         // for touchable highlight, make there be a border radius
-        <TouchableHighlight onPress={() => console.log("ok")} underlayColor={AppColors.primaryColor}>
-            <View style={styles.container}>
-                <Image source={image} style={styles.image} />
-                <View style={styles.text}>
-                    <AppText style={styles.title}>{title}</AppText>
-                    <AppText style={styles.subtitle}>{subtitle}</AppText>
+        <Swipeable renderRightActions={onSwipeLeft}>
+            <TouchableHighlight onPress={onPress} underlayColor={AppColors.primaryColor}>
+                <View style={styles.container}>
+                    <Image source={image} style={styles.image} />
+                    <View style={styles.text}>
+                        <AppText style={styles.title}>{title}</AppText>
+                        <AppText style={styles.subtitle}>{subtitle}</AppText>
+                    </View>
                 </View>
-            </View>
-        </TouchableHighlight >
+            </TouchableHighlight >
+        </Swipeable>
     );
 }
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
 import AppCard from '../components/AppCard';
+import AppIcon from '../components/AppIcon';
 import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
 import AppColors from '../config/AppColors';
+
 
 const memoryData = [
     {
@@ -26,7 +28,16 @@ const categories = [
 ];
 
 function MemoryScreen(props) {
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState(); // filter
+
+    const [refreshing, setRefreshing] = useState(false);
+    const [memories, setMemories] = useState(memoryData);
+
+    const handleDelete = (memory) => {
+        const newMemoryList = memories.filter(item => item.id !== memory.id);
+        setMemories(newMemoryList);
+    }
+
     return (
         <AppScreen>
             <AppText style={styles.tester}>My Memories</AppText>
@@ -37,10 +48,22 @@ function MemoryScreen(props) {
                 icon="apps"
                 placeholder="Categories" />
             <FlatList
-                data={memoryData}
+                style={styles.list}
+                data={memories}
                 keyExtractor={memory => memory.id.toString()}
-                renderItem={
-                    ({ item }) => <AppCard title={item.title} subtitle={item.subtitle} />} />
+                refreshing={refreshing}
+                onRefresh={() => setMemories(memoryData)}
+                renderItem={({ item }) =>
+                    <AppCard
+                        title={item.title}
+                        subtitle={item.subtitle}
+                        onPress={() => console.log(item)}
+                        onSwipeLeft={() => (
+                            <View style={styles.deleteView}>
+                                <TouchableOpacity onPress={() => handleDelete(item)}>
+                                    <AppIcon name="trash-can" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} />
+                                </TouchableOpacity>
+                            </View>)} />} />
         </AppScreen>
     );
 }
@@ -55,6 +78,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
+    },
+    deleteView: {
+        backgroundColor: "red",
+        width: 100,
+        height: 250,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+    },
+    list: {
+        backgroundColor: 'blue'
     }
 })
 export default MemoryScreen;

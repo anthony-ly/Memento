@@ -31,13 +31,33 @@ export default class DataManager {
             subtitle: "date",
             category: "L1"
         }
-    ]
+    ];
+
+    users = [
+        {
+            id: "1",
+            name: "tester1",
+            email: "test1@mail.com",
+            password: "1234"
+        },
+        {
+            id: "2",
+            name: "tester2",
+            email: "test2@mail.com",
+            password: "5678"
+        },
+    ];
 
     static getInstance() {
         if (DataManager.myInstance == null) {
             DataManager.myInstance = new DataManager();
         }
         return this.myInstance;
+    }
+
+    getUsers() {
+        console.log(this.users);
+        return this.users;
     }
 
     getUserID() {

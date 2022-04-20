@@ -19,34 +19,48 @@ const schema = Yup.object().shape(
     }
 );
 
-const users = [
-    {
-        id: "1",
-        name: "tester1",
-        email: "test1@mail.com",
-        password: "1234"
-    },
-    {
-        id: "2",
-        name: "tester2",
-        email: "test2@mail.com",
-        password: "5678"
-    },
-];
+// const users = [
+//     {
+//         id: "1",
+//         name: "tester1",
+//         email: "test1@mail.com",
+//         password: "1234"
+//     },
+//     {
+//         id: "2",
+//         name: "tester2",
+//         email: "test2@mail.com",
+//         password: "5678"
+//     },
+// ];
 
+/**
+ * checks if the values passed are equal to the values inside the users array
+ */
 const validateUser = ({ email, password }) => {
+    let data = DataManager.getInstance().getUsers();
     return (
-        users.filter((user) => user.email === email && user.password === password).length > 0
+        // users.filter((user) => user.email === email && user.password === password).length > 0
+        data.filter((user) => user.email === email && user.password === password).length > 0
     );
 }
 
+/**
+ * returns the logged in user's details based on their email address
+ */
 const getUser = ({ email }) => {
     // let commonData = DataManager.getInstance();
     // let userID = getUser({email}).id;
     // commonData.setUserID(userID);
-    return users.find((user) => user.email === email);
+    // return users.find((user) => user.email === email);
+    let data = DataManager.getInstance().getUsers();
+    console.log("here:", data);
+    return data.find((user) => user.email === email);
 }
 
+/**
+ * assigns the DataManager the value of the user who has successfully logged in
+ */
 const createUser = ({ email }) => {
     let commonData = DataManager.getInstance();
     let userID = getUser({ email }).id;

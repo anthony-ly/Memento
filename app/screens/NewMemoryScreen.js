@@ -9,6 +9,8 @@ import AppTextInput from '../components/AppTextInput';
 import AppColors from '../config/AppColors';
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
+import DataManager from '../config/DataManager';
+
 
 const categories = [
     { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
@@ -22,7 +24,7 @@ const categories = [
 //     }
 // )
 
-function NewMemoryScreen(props) {
+function NewMemoryScreen({ navigation }) {
     const [title, setTitle] = useState("");
     const [subTitle, setSubTitle] = useState("");
     const [category, setCategory] = useState();
@@ -40,6 +42,27 @@ function NewMemoryScreen(props) {
         return ((title.length > 0) && (subTitle.length > 0) && (category)
             // && (image) 
             ? true : false)
+    }
+
+    const addMemory = () => {
+        let commonData = DataManager.getInstance();
+        let user = commonData.getUserID();
+
+        // console.log(user);
+
+        const memories = commonData.getMemories(user);
+        const memoryID = memories.length + 1; // TODO set as random number
+        const newMemory = {
+            userid: user,
+            memoryid: memoryID,
+            title: title,
+            subtitle: subTitle,
+            category: category.label,
+            // image: image.path
+        };
+
+        console.log(newMemory);
+        commonData.addMemory(newMemory);
     }
 
     return (
@@ -69,7 +92,12 @@ function NewMemoryScreen(props) {
                 placeholder="Categories" />
             {categoryError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{categoryError}</AppText> : <></>}
 
-            <AppButton title="Add Memory" color="primaryColor" onPress={() => doErrorCheck()} />
+            <AppButton title="Add Memory" color="primaryColor" onPress={() => {
+                if (doErrorCheck()) {
+                    addMemory();
+                    navigation.navigate("Memories");
+                }
+            }} />
         </AppScreen>
     );
 }

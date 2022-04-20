@@ -42,9 +42,10 @@ function MemoryScreen(props) {
                 data={categories}
                 icon="apps"
                 placeholder="Categories" />
+
             <FlatList
                 style={styles.list}
-                data={memories}
+                data={memoryList}
                 keyExtractor={memory => memory.memoryid.toString()}
                 refreshing={refreshing}
                 onRefresh={() => setMemories(memoryList)}
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
     },
     list: {
         // backgroundColor: 'blue'
+        marginBottom: 100,
     }
 })
 export default MemoryScreen;

@@ -45,4 +45,8 @@ export default class DataManager {
         // error checking for null
         return this.memories.filter((memory) => memory.userid === id);
     }
+
+    addMemory(memory) {
+        this.memories.push(memory);
+    }
 }

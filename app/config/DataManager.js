@@ -36,13 +36,13 @@ export default class DataManager {
     users = [
         {
             id: "1",
-            name: "tester1",
+            fullname: "tester1",
             email: "test1@mail.com",
             password: "1234"
         },
         {
             id: "2",
-            name: "tester2",
+            fullname: "tester2",
             email: "test2@mail.com",
             password: "5678"
         },
@@ -56,7 +56,7 @@ export default class DataManager {
     }
 
     getUsers() {
-        console.log(this.users);
+        console.log("DM[getUser]", this.users);
         return this.users;
     }
 
@@ -66,6 +66,11 @@ export default class DataManager {
 
     setUserID(id) {
         this.userID = id;
+    }
+
+    addUser(user) {
+        console.log("DM[addUser]", user)
+        this.users.push(user);
     }
 
     getMemories(id) {

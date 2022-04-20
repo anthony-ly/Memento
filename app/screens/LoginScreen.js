@@ -19,21 +19,6 @@ const schema = Yup.object().shape(
     }
 );
 
-// const users = [
-//     {
-//         id: "1",
-//         name: "tester1",
-//         email: "test1@mail.com",
-//         password: "1234"
-//     },
-//     {
-//         id: "2",
-//         name: "tester2",
-//         email: "test2@mail.com",
-//         password: "5678"
-//     },
-// ];
-
 /**
  * checks if the values passed are equal to the values inside the users array
  */
@@ -54,7 +39,7 @@ const getUser = ({ email }) => {
     // commonData.setUserID(userID);
     // return users.find((user) => user.email === email);
     let data = DataManager.getInstance().getUsers();
-    console.log("here:", data);
+    console.log("login[getUser]:", data);
     return data.find((user) => user.email === email);
 }
 
@@ -89,7 +74,7 @@ function LoginScreen({ navigation }) {
                             screen: "Account",
                             params: {
                                 paramEmail: values.email,
-                                paramName: getUser(values).name
+                                paramName: getUser(values).fullname
                                 // TODO get image as well
                             }
                         }

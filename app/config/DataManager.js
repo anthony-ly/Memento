@@ -18,6 +18,13 @@ export default class DataManager {
             category: "L2"
         },
         {
+            userid: "1",
+            memoryid: 3,
+            title: "yeet",
+            subtitle: "date",
+            category: "L2"
+        },
+        {
             userid: "2",
             memoryid: 1,
             title: "Family",

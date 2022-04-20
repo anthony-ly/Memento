@@ -29,8 +29,10 @@ function MemoryScreen(props) {
     const [memories, setMemories] = useState(memoryList);
 
     const handleDelete = (memory) => {
+        console.log("deleting", memory);
         const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid);
         setMemories(newMemoryList);
+        // console.log("new", newMemoryList[0])
     }
 
     return (
@@ -45,10 +47,10 @@ function MemoryScreen(props) {
 
             <FlatList
                 style={styles.list}
-                data={memoryList}
+                data={memories}
                 keyExtractor={memory => memory.memoryid.toString()}
                 refreshing={refreshing}
-                onRefresh={() => setMemories(memoryList)}
+                onRefresh={() => setMemories(memories)}
                 renderItem={({ item }) =>
                     <AppCard
                         title={item.title}

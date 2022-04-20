@@ -8,20 +8,6 @@ import AppText from '../components/AppText';
 import AppColors from '../config/AppColors';
 import DataManager from '../config/DataManager';
 
-
-// const memoryData = [
-//     {
-//         id: 1,
-//         title: "Family",
-//         subtitle: "date",
-//     },
-//     {
-//         id: 2,
-//         title: "Friends",
-//         subtitle: "date"
-//     }
-// ]
-
 const categories = [
     { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
     { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
@@ -69,11 +55,11 @@ function MemoryScreen(props) {
                         onPress={() => console.log(item)}
                         onSwipeLeft={() => (
                             <View style={styles.deleteView}>
-                                <TouchableOpacity onPress={() => handleDelete(item)}
-                                >
+                                <TouchableOpacity onPress={() => handleDelete(item)}>
                                     <AppIcon name="trash-can" iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} />
                                 </TouchableOpacity>
-                            </View>)} />} />
+                            </View>)} />}
+            />
         </AppScreen>
     );
 }

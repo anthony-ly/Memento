@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
+import AppTextInput from '../components/AppTextInput';
 import AppColors from '../config/AppColors';
 
 const categories = [
@@ -12,9 +13,25 @@ const categories = [
 
 function NewMemoryScreen(props) {
     const [category, setCategory] = useState();
+    const [title, setTitle] = useState();
+    const [subTitle, setSubTitle] = useState();
 
     return (
         <AppScreen style={styles.container}>
+            <AppTextInput
+                icon="camera"
+                placeholder="Memory Title"
+                value={title}
+                onChangeText={(inputText) => setTitle(inputText)}
+            />
+
+            <AppTextInput
+                icon="calendar-month"
+                placeholder="Date"
+                value={subTitle}
+                onChangeText={(inputText) => setSubTitle(inputText)}
+            />
+
             <AppPicker
                 selectedItem={category}
                 onSelectItem={item => setCategory(item)}

@@ -21,7 +21,7 @@ const getCategories = () => {
     return categories;
 }
 
-function MemoryScreen({ props }) {
+function MemoryScreen({ navigation }) {
     const memoryList = getMemory();
     const categoryList = getCategories();
     const [category, setCategory] = useState(); // filter values for categories
@@ -32,11 +32,31 @@ function MemoryScreen({ props }) {
 
 
     const handleDelete = (memory) => {
+        let commonData = DataManager.getInstance();
         console.log("deleting", memory);
-        const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid);
+        // remove memory from datamanager
+        // commonData.removeMemory(memory);
+
+        // then get the new memories and assign using set memories
+        const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid); // instead of deleting from memorylist
+
+        // we delete from data manager
         setMemories(newMemoryList);
         // console.log("new", newMemoryList[0])
     }
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setMemories(getMemory());
+            // alert('Screen is focused');
+            // The screen is focused
+            // Call any action
+            // console.log("bruh");
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, []);
 
     return (
         <AppScreen>
@@ -58,6 +78,7 @@ function MemoryScreen({ props }) {
                 keyExtractor={memory => memory.memoryid.toString()}
                 refreshing={refreshing}
                 onRefresh={() => setMemories(memories)}
+                // extraData={memories}
                 renderItem={({ item }) =>
                     <AppCard
                         id={item.memoryid}

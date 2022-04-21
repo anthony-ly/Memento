@@ -66,7 +66,7 @@ export default class DataManager {
     }
 
     getUsers() {
-        console.log("DM[getUser]", this.users);
+        // console.log("DM[getUser]", this.users);
         return this.users;
     }
 
@@ -79,7 +79,7 @@ export default class DataManager {
     }
 
     addUser(user) {
-        console.log("DM[addUser]", user)
+        // console.log("DM[addUser]", user)
         this.users.push(user);
     }
 
@@ -102,26 +102,37 @@ export default class DataManager {
          * 2. check if they are empty, or in the case of category, if they are the same
          * 3. for the different ones/nonempty ones update their values according to the memory id
          */
-        console.log("before:", this.memories);
-        console.log("\n");
+        // console.log("before:", this.memories);
+        // console.log("\n");
 
         let memoryIndex = this.memories.findIndex((memory => memory.memoryid == id));
 
-        console.log("updating this:", this.memories[memoryIndex]);
+        // console.log("updating this:", this.memories[memoryIndex]);
 
         if (title !== '') {
-            console.log("different title\n")
+            // console.log("different title\n")
             this.memories[memoryIndex].title = title;
         }
         if (subtitle !== '') {
-            console.log("different subtitle\n")
+            // console.log("different subtitle\n")
             this.memories[memoryIndex].subtitle = subtitle;
         }
         if (typeof category !== 'undefined' && this.memories[memoryIndex].category !== category.label) {
-            console.log("different category\n")
+            // console.log("different category\n")
             this.memories[memoryIndex].category = category.label;
         }
 
-        console.log("after:", this.memories);
+        // console.log("after:", this.memories);
+    }
+
+    removeMemory(memory) {
+        /**
+         * Search memories to find the corresponding memory that has the memoryid as the parameter id
+         * once that has been found, just remove it
+         */
+        this.memories = this.memories.filter((item) => item.memoryid !== memory.memoryid);
+        console.log("removemems:", memories, "\n\n\n");
+        // return this.memories.filter((stuff) => stuff.memoryid !== memory.memoryid);
+
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AppColors from '../config/AppColors';
@@ -14,6 +14,10 @@ function AccountScreen({ navigation, route }) {
     return (
         <AppScreen style={styles.container}>
 
+            {/* <AppButton title="logout" onPress={() => navigation.navigate('Welcome')}></AppButton> */}
+            <TouchableOpacity style={styles.logout} onPress={() => navigation.navigate('Welcome')}>
+                <AppIcon name="logout" iconColor={AppColors.primaryColor} backgroundColor={AppColors.otherColor} />
+            </TouchableOpacity>
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
                     name="camera"
@@ -23,13 +27,9 @@ function AccountScreen({ navigation, route }) {
             </View>
             <View style={styles.profileContainer}>
                 {/* <AppListItem image={route.params.paramImage} title={route.params.paramName} subtitle={route.params.paramEmail}/> */}
-                <AppListItem title={route.params.paramName} subtitle={route.params.paramEmail} />
+                <AppListItem image={require("../assets/pfp.jpg")} title={route.params.paramName} subtitle={route.params.paramEmail} />
             </View>
-            {/* <View style={styles.linksContainer}>
-                <AppListItem title="My Books" IconComponent={<AppIcon name="book-open-variant" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("Books")} />
-                <AppListItem title="My Authors" IconComponent={<AppIcon name="account-heart" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("MyAuthors")} />
-            </View> */}
-            <AppButton title="logout" onPress={() => navigation.navigate('Welcome')}></AppButton>
+            {/* maybe put an image here?? */}
         </AppScreen >
     );
 }
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         height: 150,
         justifyContent: "space-around",
         paddingLeft: 10,
+    },
+    logout: {
+        flexDirection: 'row-reverse'
     }
 })
 export default AccountScreen;

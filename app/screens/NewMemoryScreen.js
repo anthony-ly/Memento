@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
 import { Formik } from 'formik';
 // import * as Yup from 'yup';
 import * as ImagePicker from 'expo-image-picker';
@@ -86,23 +86,27 @@ function NewMemoryScreen({ navigation }) {
 
     return (
         <AppScreen style={styles.container}>
+            {/* Title input */}
             <AppTextInput
                 icon="camera"
                 placeholder="Memory Title"
                 value={title}
+                size={"100%"}
                 onChangeText={(inputText) => setTitle(inputText)}
             />
-
             {titleError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{titleError}</AppText> : <></>}
 
+            {/* Subtitle input */}
             <AppTextInput
                 icon="calendar-month"
                 placeholder="Date"
                 value={subTitle}
+                size={"100%"}
                 onChangeText={(inputText) => setSubTitle(inputText)}
             />
             {subTitleError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{subTitleError}</AppText> : <></>}
 
+            {/* Category Picker */}
             <AppPicker
                 selectedItem={category}
                 onSelectItem={item => setCategory(item)}
@@ -111,20 +115,27 @@ function NewMemoryScreen({ navigation }) {
                 placeholder="Categories" />
             {categoryError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{categoryError}</AppText> : <></>}
 
-            <TouchableOpacity style={styles.imageButton} onPress={openImagePickerAsync}>
-                <AppIcon name="camera" size={80} iconColor="red" backgroundColor="blue" ></AppIcon>
-                <Image source={{ uri: image.path }} style={{ height: 80, width: 80, marginLeft: 20, }} />
+            {/* Upload image button */}
+            <TouchableOpacity style={[styles.imageButton, { marginBottom: 10 }]} onPress={openImagePickerAsync}>
+                <AppIcon name="camera" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.primaryColor} ></AppIcon>
             </TouchableOpacity>
 
+            <View style={{ backgroundColor: AppColors.primaryColor, marginBottom: 20 }}>
+                <Image source={{ uri: image.path }} style={{ height: 400, width: 400 }} />
+            </View>
             {imageError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{imageError}</AppText> : <></>}
 
-            <AppButton title="Add Memory" color="primaryColor" onPress={() => {
-                if (doErrorCheck()) {
-                    addMemory();
-                    navigation.navigate("Memories");
+            {/* Add Memory Button */}
+            <View style={styles.button}>
 
-                }
-            }} />
+                <AppButton title="Add Memory" color="primaryColor" onPress={() => {
+                    if (doErrorCheck()) {
+                        addMemory();
+                        navigation.navigate("Memories");
+
+                    }
+                }} />
+            </View>
         </AppScreen>
     );
 }
@@ -132,9 +143,17 @@ function NewMemoryScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: AppColors.secondaryColor,
+        alignContent: 'center',
+        justifyContent: 'flex-end',
+        flexDirection: "column"
     },
 
     imageButton: {
+        flexDirection: 'row',
+        justifyContent: "center",
+        alignContent: "center",
+    },
+    button: {
         flexDirection: 'row',
         justifyContent: "center",
         alignContent: "center",

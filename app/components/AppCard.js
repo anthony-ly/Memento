@@ -69,7 +69,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
                     />
 
                     <AppButton title="Update Memory" color="secondaryColor" onPress={() => {
-                        // console.log(id, newTitle, newSubtitle, newCategory);
+                        console.log(id, newTitle, newSubtitle, newCategory);
                         let commonData = DataManager.getInstance();
                         commonData.updateMemory(id, newTitle, newSubtitle, newCategory);
                     }} />

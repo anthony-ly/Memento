@@ -92,6 +92,10 @@ export default class DataManager {
         return this.memories.filter((memory) => memory.userid === id);
     }
 
+    getAllMemories() {
+        return this.memories;
+    }
+
     getMemory(id) {
         return this.memories.filter((memory) => memory.memoryid == id);
     }

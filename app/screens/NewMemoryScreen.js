@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Formik } from 'formik';
 // import * as Yup from 'yup';
+import * as ImagePicker from 'expo-image-picker';
 
 import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
 import AppTextInput from '../components/AppTextInput';
 import AppColors from '../config/AppColors';
 import AppButton from '../components/AppButton';
+import AppIcon from '../components/AppIcon';
 import AppText from '../components/AppText';
 import DataManager from '../config/DataManager';
 
@@ -27,21 +29,38 @@ const categories = [
 function NewMemoryScreen({ navigation }) {
     const [title, setTitle] = useState("");
     const [subTitle, setSubTitle] = useState("");
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState("");
+    const [image, setImage] = useState("");
 
     const [titleError, setTitleError] = useState("");
     const [subTitleError, setSubTitleError] = useState("");
     const [categoryError, setCategoryError] = useState("");
-    // const[imageError, setImageError]=useState("");
+    const [imageError, setImageError] = useState("");
+
+    let openImagePickerAsync = async () => { // remember to use this
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+            alert("Permission to access camera roll is required!");
+            return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+        if (pickerResult.cancelled === true) {
+            return;
+        }
+        setImage({ path: pickerResult.uri });
+        console.log(pickerResult);
+    }
+
 
     const doErrorCheck = () => {
         setTitleError(title.length > 0 ? "" : "Please set a valid Book Title");
         setSubTitleError(subTitle.length > 0 ? "" : "Please set a valid subtitle");
         setCategoryError(category ? "" : "Please pick a category from the list");
-        // setImageError(image ? "" : "Please pick an image");
-        return ((title.length > 0) && (subTitle.length > 0) && (category)
-            // && (image) 
-            ? true : false)
+        setImageError(image ? "" : "Please pick an image");
+        return ((title.length > 0) && (subTitle.length > 0) && (category) && (image) ? true : false)
     }
 
     const addMemory = () => {
@@ -92,10 +111,18 @@ function NewMemoryScreen({ navigation }) {
                 placeholder="Categories" />
             {categoryError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{categoryError}</AppText> : <></>}
 
+            <TouchableOpacity style={styles.imageButton} onPress={openImagePickerAsync}>
+                <AppIcon name="camera" size={80} iconColor="red" backgroundColor="blue" ></AppIcon>
+                <Image source={{ uri: image.path }} style={{ height: 80, width: 80, marginLeft: 20, }} />
+            </TouchableOpacity>
+
+            {imageError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{imageError}</AppText> : <></>}
+
             <AppButton title="Add Memory" color="primaryColor" onPress={() => {
                 if (doErrorCheck()) {
-                    addMemory();
-                    navigation.navigate("Memories");
+                    // addMemory();
+                    // navigation.navigate("Memories");
+
                 }
             }} />
         </AppScreen>
@@ -105,6 +132,12 @@ function NewMemoryScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: AppColors.secondaryColor,
+    },
+
+    imageButton: {
+        flexDirection: 'row',
+        justifyContent: "center",
+        alignContent: "center",
     }
 })
 

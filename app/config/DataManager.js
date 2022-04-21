@@ -26,7 +26,7 @@ export default class DataManager {
         },
         {
             userid: "2",
-            memoryid: 1,
+            memoryid: 4,
             title: "Family",
             subtitle: "date",
             category: "L1"
@@ -48,11 +48,21 @@ export default class DataManager {
         },
     ];
 
+    categories = [
+        { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
+        { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
+        { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
+    ];
+
     static getInstance() {
         if (DataManager.myInstance == null) {
             DataManager.myInstance = new DataManager();
         }
         return this.myInstance;
+    }
+
+    getCategories() {
+        return this.categories;
     }
 
     getUsers() {
@@ -78,7 +88,40 @@ export default class DataManager {
         return this.memories.filter((memory) => memory.userid === id);
     }
 
+    getMemory(id) {
+        return this.memories.filter((memory) => memory.memoryid == id);
+    }
+
     addMemory(memory) {
         this.memories.push(memory);
+    }
+
+    updateMemory(id, title, subtitle, category) {
+        /**
+         * 1. pass the new values to the function (some of these might be null/empty)
+         * 2. check if they are empty, or in the case of category, if they are the same
+         * 3. for the different ones/nonempty ones update their values according to the memory id
+         */
+        console.log("before:", this.memories);
+        console.log("\n");
+
+        let memoryIndex = this.memories.findIndex((memory => memory.memoryid == id));
+
+        console.log("updating this:", this.memories[memoryIndex]);
+
+        if (title !== '') {
+            console.log("different title\n")
+            this.memories[memoryIndex].title = title;
+        }
+        if (subtitle !== '') {
+            console.log("different subtitle\n")
+            this.memories[memoryIndex].subtitle = subtitle;
+        }
+        if (typeof category !== 'undefined' && this.memories[memoryIndex].category !== category.label) {
+            console.log("different category\n")
+            this.memories[memoryIndex].category = category.label;
+        }
+
+        console.log("after:", this.memories);
     }
 }

@@ -7,6 +7,7 @@ import AppIcon from '../components/AppIcon';
 import AppListItem from '../components/AppListItem';
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
+import AppButton from '../components/AppButton';
 
 
 function AccountScreen({ navigation, route }) {
@@ -24,11 +25,12 @@ function AccountScreen({ navigation, route }) {
                 {/* <AppListItem image={route.params.paramImage} title={route.params.paramName} subtitle={route.params.paramEmail}/> */}
                 <AppListItem title={route.params.paramName} subtitle={route.params.paramEmail} />
             </View>
-            {/* <View style={styles.linksContainer}>  */}
-            {/* <AppListItem title="My Books" IconComponent={<AppIcon name="book-open-variant" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("Books")} /> */}
-            {/* <AppListItem title="My Authors" IconComponent={<AppIcon name="account-heart" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("MyAuthors")} /> */}
-            {/* </View> */}
-        </AppScreen>
+            {/* <View style={styles.linksContainer}>
+                <AppListItem title="My Books" IconComponent={<AppIcon name="book-open-variant" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("Books")} />
+                <AppListItem title="My Authors" IconComponent={<AppIcon name="account-heart" size={50} iconColor={AppColors.otherColor} backgroundColor={AppColors.secondaryColor} />} onPress={() => navigation.navigate("MyAuthors")} />
+            </View> */}
+            <AppButton title="logout" onPress={() => navigation.navigate('Welcome')}></AppButton>
+        </AppScreen >
     );
 }
 

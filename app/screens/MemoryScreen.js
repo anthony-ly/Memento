@@ -84,6 +84,7 @@ function MemoryScreen({ navigation }) {
                         id={item.memoryid}
                         title={item.title}
                         subtitle={item.subtitle}
+                        image={item.image}
                         // onPress={() => console.log(item)}
                         category={item.category}
                         onSwipeLeft={() => (

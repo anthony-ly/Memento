@@ -77,7 +77,7 @@ function NewMemoryScreen({ navigation }) {
             title: title,
             subtitle: subTitle,
             category: category.label,
-            // image: image.path
+            image: image.path
         };
 
         console.log(newMemory);
@@ -120,8 +120,8 @@ function NewMemoryScreen({ navigation }) {
 
             <AppButton title="Add Memory" color="primaryColor" onPress={() => {
                 if (doErrorCheck()) {
-                    // addMemory();
-                    // navigation.navigate("Memories");
+                    addMemory();
+                    navigation.navigate("Memories");
 
                 }
             }} />

@@ -11,13 +11,13 @@ import AccountScreen from './app/screens/AccountScreen';
 export default function App() {
   return (
 
-    //<NavigationContainer>
-    //<AuthNavigator />
-    //</NavigationContainer>
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
     // <AccountScreen></AccountScreen>
     // <MemoryScreen></MemoryScreen>
-    <NewMemoryScreen>
-    </NewMemoryScreen>
+    // <NewMemoryScreen>
+    // </NewMemoryScreen>
 
 
   );

@@ -32,7 +32,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
             <Swipeable renderRightActions={onSwipeLeft}>
                 <TouchableHighlight onPress={() => setModalVisible(true)} underlayColor={AppColors.primaryColor}>
                     <View style={styles.container}>
-                        <Image source={image} style={styles.image} />
+                        {isFinite(image) ? <Image source={image} style={styles.image} /> : <Image source={{ uri: image }} style={styles.image} />}
                         <View style={styles.text}>
                             <AppText style={styles.title}>{title}</AppText>
                             <AppText style={styles.subtitle}>{subtitle}</AppText>

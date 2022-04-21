@@ -8,6 +8,7 @@ export default class DataManager {
             memoryid: 1,
             title: "Family",
             subtitle: "date",
+            image: require("../assets/Book1Cover.jpg"),
             category: "L1"
         },
         {
@@ -15,6 +16,7 @@ export default class DataManager {
             memoryid: 2,
             title: "Friends",
             subtitle: "date",
+            image: require("../assets/Book1Cover.jpg"),
             category: "L2"
         },
         {
@@ -22,6 +24,7 @@ export default class DataManager {
             memoryid: 3,
             title: "yeet",
             subtitle: "date",
+            image: require("../assets/Book1Cover.jpg"),
             category: "L2"
         },
         {
@@ -29,6 +32,7 @@ export default class DataManager {
             memoryid: 4,
             title: "Family",
             subtitle: "date",
+            image: require("../assets/Book1Cover.jpg"),
             category: "L1"
         }
     ];

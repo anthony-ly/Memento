@@ -87,6 +87,7 @@ export default class DataManager {
         this.users.push(user);
     }
 
+    // gets the memories for the corresponding user
     getMemories(id) {
         // error checking for null
         return this.memories.filter((memory) => memory.userid === id);
@@ -97,7 +98,14 @@ export default class DataManager {
     }
 
     getMemory(id) {
-        return this.memories.filter((memory) => memory.memoryid == id);
+        return this.memories.filter((memory) => memory.memoryid === id);
+    }
+
+    filterMemory(category, id) {
+        let filter = this.memories.filter((memory) => memory.category === category);
+        return filter.filter((memory) => memory.userid === this.userID);
+
+        // return this.memories.filter((memory) => memory.category === category);
     }
 
     addMemory(memory) {

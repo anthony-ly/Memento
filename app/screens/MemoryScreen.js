@@ -65,7 +65,14 @@ function MemoryScreen({ navigation }) {
             {/* Category filter */}
             <AppPicker
                 selectedItem={category}
-                onSelectItem={item => setCategory(item)}
+                onSelectItem={item => {
+                    setCategory(item)
+                    // set memories to only show those that have the same category
+                    let commonData = DataManager.getInstance();
+                    // let filtered = commonData.filterMemory(item.label);
+                    // console.log(filtered);
+                    setMemories(commonData.filterMemory(item.label, commonData.getUserID()));
+                }}
                 data={categoryList}
                 icon="apps"
                 placeholder="Categories"
@@ -78,7 +85,7 @@ function MemoryScreen({ navigation }) {
                 keyExtractor={memory => memory.memoryid.toString()}
                 refreshing={refreshing}
                 onRefresh={() => setMemories(memories)}
-                // extraData={memories}
+                extraData={memories}
                 renderItem={({ item }) =>
                     <AppCard
                         id={item.memoryid}

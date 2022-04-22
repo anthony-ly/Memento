@@ -12,12 +12,12 @@ import AppIcon from '../components/AppIcon';
 import AppText from '../components/AppText';
 import DataManager from '../config/DataManager';
 
+const getCategories = () => {
+    let commonData = DataManager.getInstance();
+    let categories = commonData.getCategories();
 
-const categories = [
-    { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
-    { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
-    { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
-];
+    return categories;
+}
 
 function NewMemoryScreen({ navigation }) {
     const [title, setTitle] = useState("");
@@ -29,6 +29,8 @@ function NewMemoryScreen({ navigation }) {
     const [subTitleError, setSubTitleError] = useState("");
     const [categoryError, setCategoryError] = useState("");
     const [imageError, setImageError] = useState("");
+
+    const categoryList = getCategories();
 
     let openImagePickerAsync = async () => { // remember to use this
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -120,7 +122,7 @@ function NewMemoryScreen({ navigation }) {
             <AppPicker
                 selectedItem={category}
                 onSelectItem={item => setCategory(item)}
-                data={categories}
+                data={categoryList}
                 icon="apps"
                 placeholder="Categories" />
             {categoryError.length > 0 ? <AppText style={{ margin: 5, color: "red", fontSize: 16 }}>{categoryError}</AppText> : <></>}

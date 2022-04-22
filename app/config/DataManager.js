@@ -7,25 +7,17 @@ export default class DataManager {
             userid: "1",
             memoryid: 1,
             title: "Family",
-            subtitle: "date",
-            image: require("../assets/Book1Cover.jpg"),
-            category: "L1"
+            subtitle: "Long time no see.",
+            image: require("../assets/family.jpg"),
+            category: "Family"
         },
         {
             userid: "1",
             memoryid: 2,
             title: "Friends",
-            subtitle: "date",
-            image: require("../assets/Book1Cover.jpg"),
-            category: "L2"
-        },
-        {
-            userid: "1",
-            memoryid: 3,
-            title: "yeet",
-            subtitle: "date",
-            image: require("../assets/Book1Cover.jpg"),
-            category: "L2"
+            subtitle: "Fun at the park.",
+            image: require("../assets/park.jpg"),
+            category: "Friends"
         },
         {
             userid: "2",
@@ -33,29 +25,29 @@ export default class DataManager {
             title: "Family",
             subtitle: "date",
             image: require("../assets/Book1Cover.jpg"),
-            category: "L1"
+            category: "Family"
         }
     ];
 
     users = [
         {
             id: "1",
-            fullname: "tester1",
-            email: "test1@mail.com",
+            fullname: "John Smith",
+            email: "js@mail.com",
             password: "1234"
         },
         {
             id: "2",
-            fullname: "tester2",
-            email: "test2@mail.com",
+            fullname: "Blake Reeves",
+            email: "br@mail.com",
             password: "5678"
         },
     ];
 
     categories = [
-        { label: "L1", value: 1, icon: "airplane-takeoff", backgroundColor: "red" },
-        { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
-        { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
+        { label: "Family", value: 1, icon: "heart", backgroundColor: "black" },
+        { label: "Friends", value: 2, icon: "account-group", backgroundColor: "black" },
+        { label: "Nature", value: 3, icon: "tree", backgroundColor: "black" },
     ];
 
     static getInstance() {

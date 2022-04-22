@@ -16,7 +16,7 @@ function WelcomeScreen({ navigation }) {
                     name="camera"
                     size={60}
                     color={AppColors.otherColor} />
-                <AppText style={{ fontSize: 50, fontWeight: "bold", textAlign: 'center' }}>Welcome to Memento</AppText>
+                <AppText style={{ fontWeight: "bold", textAlign: 'center' }} size={50}>Welcome to Memento</AppText>
             </View>
 
             <View style={styles.buttonContainer}>

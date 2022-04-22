@@ -52,7 +52,7 @@ function RegisterScreen({ navigation }) {
                     name="camera"
                     size={60}
                     color={AppColors.otherColor} />
-                <AppText style={{ fontSize: "50", fontWeight: "bold", marginTop: 20 }}>Register</AppText>
+                <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={50}>Register</AppText>
             </View>
 
             <Formik

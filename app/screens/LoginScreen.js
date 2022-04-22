@@ -61,7 +61,7 @@ function LoginScreen({ navigation }) {
                     name="camera"
                     size={60}
                     color={AppColors.otherColor} />
-                <AppText style={{ fontSize: "50", fontWeight: "bold", marginTop: 20 }}>Login</AppText>
+                <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={50}>Login</AppText>
             </View>
 
             <Formik

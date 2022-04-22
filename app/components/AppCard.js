@@ -18,9 +18,9 @@ const getCategories = () => {
     return categories;
 }
 
-function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
-    const [newTitle, setTitle] = useState("");
-    const [newSubtitle, setSubTitle] = useState("");
+function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation }) {
+    const [newTitle, setTitle] = useState(title);
+    const [newSubtitle, setSubTitle] = useState(subtitle);
     const [newCategory, setCategory] = useState();
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -30,12 +30,15 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
         // for touchable highlight, make there be a border radius
         <>
             <Swipeable renderRightActions={onSwipeLeft}>
-                <TouchableHighlight onPress={() => setModalVisible(true)} underlayColor={AppColors.primaryColor}>
+                <TouchableHighlight onPress={() => {
+                    // reset the modal stuff here
+                    setModalVisible(true);
+                }} underlayColor={AppColors.primaryColor}>
                     <View style={styles.container}>
                         {isFinite(image) ? <Image source={image} style={styles.image} /> : <Image source={{ uri: image }} style={styles.image} />}
                         <View style={styles.text}>
-                            <AppText style={styles.title}>{title}</AppText>
-                            <AppText style={styles.subtitle}>{subtitle}</AppText>
+                            <AppText style={styles.title}>{newTitle}</AppText>
+                            <AppText style={styles.subtitle}>{newSubtitle}</AppText>
                         </View>
                     </View>
                 </TouchableHighlight >
@@ -45,11 +48,13 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
             <Modal visible={modalVisible} animationType="slide">
                 <AppScreen>
                     <Button title="Close" onPress={() => setModalVisible(false)}></Button>
-                    <AppText>{title}-{subtitle}-{category}</AppText>
+                    {/* <AppText>{title}-{subtitle}-{category}</AppText> */}
+                    <AppText>Update Memory</AppText>
                     <AppTextInput
                         icon="camera"
                         placeholder="New Title"
                         value={newTitle}
+                        size="100%"
                         onChangeText={(inputText) => setTitle(inputText)}
                     />
 
@@ -57,6 +62,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
                         icon="calendar-month"
                         placeholder="New Date"
                         value={newSubtitle}
+                        size="100%"
                         onChangeText={(inputText) => setSubTitle(inputText)}
                     />
 
@@ -68,11 +74,15 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft }) {
                         placeholder="Categories"
                     />
 
-                    <AppButton title="Update Memory" color="secondaryColor" onPress={() => {
-                        console.log(id, newTitle, newSubtitle, newCategory);
-                        let commonData = DataManager.getInstance();
-                        commonData.updateMemory(id, newTitle, newSubtitle, newCategory);
-                    }} />
+                    <View style={styles.button}>
+                        <AppButton title="Update Memory" color="secondaryColor" onPress={() => {
+                            console.log(id, newTitle, newSubtitle, newCategory);
+                            let commonData = DataManager.getInstance();
+                            commonData.updateMemory(id, newTitle, newSubtitle, newCategory);
+                            setModalVisible(false);
+                        }} />
+                    </View>
+
 
                 </AppScreen>
             </Modal>
@@ -100,6 +110,11 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 16,
+    },
+    button: {
+        flexDirection: 'row',
+        justifyContent: "center",
+        alignContent: "center",
     }
 })
 

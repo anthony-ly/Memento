@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
 import { Formik } from 'formik';
-// import * as Yup from 'yup';
 import * as ImagePicker from 'expo-image-picker';
 
 import AppPicker from '../components/AppPicker';
@@ -19,12 +18,6 @@ const categories = [
     { label: "L2", value: 2, icon: "ghost", backgroundColor: "blue" },
     { label: "L3", value: 3, icon: "flash", backgroundColor: "green" },
 ];
-
-// const schema = Yup.object().shape(
-//     {
-//         title: Yup.string().required.
-//     }
-// )
 
 function NewMemoryScreen({ navigation }) {
     const [title, setTitle] = useState("");

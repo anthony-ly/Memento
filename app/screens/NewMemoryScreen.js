@@ -110,8 +110,8 @@ function NewMemoryScreen({ navigation }) {
 
             {/* Subtitle input */}
             <AppTextInput
-                icon="calendar-month"
-                placeholder="Date"
+                icon="clipboard"
+                placeholder="Description"
                 value={subTitle}
                 size={"100%"}
                 onChangeText={(inputText) => setSubTitle(inputText)}

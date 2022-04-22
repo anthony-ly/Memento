@@ -59,8 +59,8 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
                     />
 
                     <AppTextInput
-                        icon="calendar-month"
-                        placeholder="New Date"
+                        icon="clipboard"
+                        placeholder="New Description"
                         value={newSubtitle}
                         size="100%"
                         onChangeText={(inputText) => setSubTitle(inputText)}

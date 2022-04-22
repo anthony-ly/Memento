@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
+
 import AppCard from '../components/AppCard';
+import AppColors from '../config/AppColors';
 import AppIcon from '../components/AppIcon';
 import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
-import AppColors from '../config/AppColors';
+
 import DataManager from '../config/DataManager';
 
+/**
+ * 
+ * @returns memory data from DataManager
+ */
 const getMemory = () => {
     let commonData = DataManager.getInstance();
     let user = commonData.getUserID();
     return commonData.getMemories(user);
 }
 
+/**
+ * 
+ * @returns category data from DataManager
+ */
 const getCategories = () => {
     let commonData = DataManager.getInstance();
     let categories = commonData.getCategories();
@@ -22,29 +32,36 @@ const getCategories = () => {
 }
 
 function MemoryScreen({ navigation }) {
+    //  variables containing the data from DataManager
     const memoryList = getMemory();
     const categoryList = getCategories();
-    const [category, setCategory] = useState(); // filter values for categories
+    const [category, setCategory] = useState();
 
+    // useState variables
     const [refreshing, setRefreshing] = useState(false);
     const [memories, setMemories] = useState(memoryList);
 
 
-
+    /**
+     * 
+     * @param memory - memory to be removed
+     * removes memory from the memory data
+     */
     const handleDelete = (memory) => {
         let commonData = DataManager.getInstance();
-        console.log("deleting", memory);
-        // remove memory from datamanager
-        // commonData.removeMemory(memory);
 
-        // then get the new memories and assign using set memories
+        // filter the memory data to not contain the removed memory
         const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid); // instead of deleting from memorylist
+
+        // assign the new memory list to the DataManager
         commonData.removeMemory(newMemoryList);
-        // we delete from data manager
+
+        // set the state
         setMemories(newMemoryList);
-        // console.log("new", newMemoryList[0])
+
     }
 
+    // checks if the screen is in focus, if it is, get the latest memory values from DataManager
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             setMemories(getMemory());
@@ -66,8 +83,6 @@ function MemoryScreen({ navigation }) {
                     setCategory(item)
                     // set memories to only show those that have the same category
                     let commonData = DataManager.getInstance();
-                    // let filtered = commonData.filterMemory(item.label);
-                    // console.log(filtered);
                     setMemories(commonData.filterMemory(item.label, commonData.getUserID()));
                 }}
                 data={categoryList}
@@ -89,7 +104,6 @@ function MemoryScreen({ navigation }) {
                         title={item.title}
                         subtitle={item.subtitle}
                         image={item.image}
-                        // onPress={() => console.log(item)}
                         category={item.category}
                         onSwipeLeft={() => (
                             <View style={styles.deleteView}>

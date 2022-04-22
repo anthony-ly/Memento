@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableHighlight, Modal, Button } from 'react-native';
+import { View, Image, StyleSheet, TouchableHighlight, Modal, Button } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import AppColors from '../config/AppColors';
-import AppText from '../components/AppText'
-import AppScreen from './AppScreen';
-import AppTextInput from './AppTextInput';
-import AppPicker from './AppPicker';
 import AppButton from './AppButton';
+import AppColors from '../config/AppColors';
+import AppPicker from './AppPicker';
+import AppScreen from './AppScreen';
+import AppText from '../components/AppText'
+import AppTextInput from './AppTextInput';
+
 import DataManager from '../config/DataManager';
 
 
+/**
+ * 
+ * @returns the array of categories in the data manager
+ */
 const getCategories = () => {
     let commonData = DataManager.getInstance();
     let categories = commonData.getCategories();
@@ -18,22 +23,23 @@ const getCategories = () => {
     return categories;
 }
 
-function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation }) {
+function AppCard({ id, title, subtitle, image, onSwipeLeft }) {
+    // Use states for setting the latest value for the corresponding memory info fields
     const [newTitle, setTitle] = useState(title);
     const [newSubtitle, setSubTitle] = useState(subtitle);
     const [newCategory, setCategory] = useState();
 
     const [modalVisible, setModalVisible] = useState(false);
-
     const categoryList = getCategories();
+
     return (
-        // for touchable highlight, make there be a border radius
         <>
             <Swipeable renderRightActions={onSwipeLeft}>
                 <TouchableHighlight onPress={() => {
-                    // reset the modal stuff here
+                    // If the user presses on the AppCard, display the modal that has the AppCard info
                     setModalVisible(true);
                 }} underlayColor={AppColors.primaryColor}>
+                    {/* App card info containing the image, title and subtitle of the memory */}
                     <View style={styles.container}>
                         {isFinite(image) ? <Image source={image} style={styles.image} /> : <Image source={{ uri: image }} style={styles.image} />}
                         <View style={styles.text}>
@@ -48,7 +54,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
             <Modal visible={modalVisible} animationType="slide">
                 <AppScreen style={styles.form}>
                     <Button title="Close" onPress={() => setModalVisible(false)}></Button>
-                    {/* <AppText style={{ fontWeight: "bold", marginTop: 20, marginBottom: 20 }} size={30}>Update Memory</AppText> */}
+                    {/* Title field */}
                     <AppTextInput
                         icon="camera"
                         placeholder="New Title"
@@ -57,6 +63,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
                         onChangeText={(inputText) => setTitle(inputText)}
                     />
 
+                    {/* Description field */}
                     <AppTextInput
                         icon="clipboard"
                         placeholder="New Description"
@@ -65,6 +72,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
                         onChangeText={(inputText) => setSubTitle(inputText)}
                     />
 
+                    {/* Collection Category Picker */}
                     <AppPicker
                         selectedItem={newCategory}
                         onSelectItem={item => setCategory(item)}
@@ -73,6 +81,7 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
                         placeholder="Categories"
                     />
 
+                    {/* Update memory info button */}
                     <View style={styles.button}>
                         <AppButton title="Update Memory" color="secondaryColor" onPress={() => {
                             console.log(id, newTitle, newSubtitle, newCategory);

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
-import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
 
+import AppButton from '../components/AppButton';
+import AppColors from '../config/AppColors';
+import AppIcon from '../components/AppIcon';
 import AppPicker from '../components/AppPicker';
 import AppScreen from '../components/AppScreen';
-import AppTextInput from '../components/AppTextInput';
-import AppColors from '../config/AppColors';
-import AppButton from '../components/AppButton';
-import AppIcon from '../components/AppIcon';
 import AppText from '../components/AppText';
+import AppTextInput from '../components/AppTextInput';
+
 import DataManager from '../config/DataManager';
 
+/**
+ * 
+ * @returns category data from DataManager
+ */
 const getCategories = () => {
     let commonData = DataManager.getInstance();
     let categories = commonData.getCategories();
@@ -20,19 +24,23 @@ const getCategories = () => {
 }
 
 function NewMemoryScreen({ navigation }) {
+    // use state variables
     const [title, setTitle] = useState("");
     const [subTitle, setSubTitle] = useState("");
     const [category, setCategory] = useState("");
     const [image, setImage] = useState("");
 
+    // error checking
     const [titleError, setTitleError] = useState("");
     const [subTitleError, setSubTitleError] = useState("");
     const [categoryError, setCategoryError] = useState("");
     const [imageError, setImageError] = useState("");
 
+    // data manager values
     const categoryList = getCategories();
 
-    let openImagePickerAsync = async () => { // remember to use this
+    // image picker code
+    let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
         if (permissionResult.granted === false) {
@@ -46,10 +54,9 @@ function NewMemoryScreen({ navigation }) {
             return;
         }
         setImage({ path: pickerResult.uri });
-        console.log(pickerResult);
     }
 
-
+    // error handling
     const doErrorCheck = () => {
         setTitleError(title.length > 0 ? "" : "Please set a valid Book Title");
         setSubTitleError(subTitle.length > 0 ? "" : "Please set a valid subtitle");
@@ -58,11 +65,10 @@ function NewMemoryScreen({ navigation }) {
         return ((title.length > 0) && (subTitle.length > 0) && (category) && (image) ? true : false)
     }
 
+    // adds memory to the DataManager array memories
     const addMemory = () => {
         let commonData = DataManager.getInstance();
         let user = commonData.getUserID();
-
-        // console.log(user);
 
         const memories = commonData.getMemories(user);
         const memoryID = commonData.getAllMemories().length + Math.floor(Math.random() * 1000);
@@ -75,16 +81,12 @@ function NewMemoryScreen({ navigation }) {
             image: image.path
         };
 
-        console.log(newMemory);
         commonData.addMemory(newMemory);
     }
 
+    // checks if the screen is in focus, if it is, reset the form values
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            // setMemories(getMemory());
-            // alert('Screen is focused');
-            // The screen is focused
-            // Call any action
             setTitle("");
             setSubTitle("");
             setCategory("");
@@ -94,7 +96,6 @@ function NewMemoryScreen({ navigation }) {
         return unsubscribe;
     }, []);
 
-    console.log("image", image);
 
     return (
         <AppScreen style={styles.container}>

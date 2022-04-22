@@ -11,6 +11,7 @@ import AppColors from '../config/AppColors';
 function WelcomeScreen({ navigation }) {
     return (
         <AppScreen>
+            {/* Header */}
             <View style={styles.banner}>
                 <MaterialCommunityIcons
                     name="camera"
@@ -19,10 +20,9 @@ function WelcomeScreen({ navigation }) {
                 <AppText style={{ fontWeight: "bold", textAlign: 'center' }} size={50}>Welcome to Memento</AppText>
             </View>
 
+            {/* Login button */}
             <View style={styles.buttonContainer}>
-                {/* <AppButton title="Login" onPress={() => navigation.navigate("Login")} /> */}
                 <AppButton title="Login" color="secondaryColor" onPress={() => navigation.navigate("Login")} />
-                {/* <AppButton title="Register" color="secondaryColor" onPress={() => navigation.navigate("Register")} /> */}
                 <AppButton title="Register" text="white" color="otherColor" onPress={() => navigation.navigate("Register")} />
             </View>
         </AppScreen>
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         marginTop: 250,
-        // marginEnd: 10,
         flexDirection: 'column',
         justifyContent: 'space-between',
         height: 120,

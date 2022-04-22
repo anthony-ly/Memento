@@ -4,13 +4,15 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
+import AppButton from '../components/AppButton';
 import AppColors from '../config/AppColors';
 import AppScreen from '../components/AppScreen';
-import AppTextInput from '../components/AppTextInput';
 import AppText from '../components/AppText';
-import AppButton from '../components/AppButton';
+import AppTextInput from '../components/AppTextInput';
+
 import DataManager from '../config/DataManager';
 
+// error checking
 const schema = Yup.object().shape(
     {
         fullname: Yup.string().required().label("Full Name"),
@@ -22,7 +24,7 @@ const schema = Yup.object().shape(
 /**
  * checks if the values passed are equal to the values inside the users array
  */
-const validateUser = ({ fullname, email, password }) => {
+const validateUser = ({ email }) => {
     let data = DataManager.getInstance().getUsers();
     return (
         // users.filter((user) => user.email === email && user.password === password).length > 0
@@ -35,18 +37,14 @@ const validateUser = ({ fullname, email, password }) => {
  */
 const createUser = (data) => {
     let commonData = DataManager.getInstance();
-    console.log("register[CREATEUSER]", data)
     commonData.addUser(data);
 }
 
 function RegisterScreen({ navigation }) {
-
-    const [userName, setUserName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-
     return (
         <AppScreen style={styles.container}>
+
+            {/* Header */}
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
                     name="camera"
@@ -55,13 +53,13 @@ function RegisterScreen({ navigation }) {
                 <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={50}>Register</AppText>
             </View>
 
+            {/* Input */}
             <Formik
                 initialValues={{ fullname: '', email: '', password: '', }}
                 onSubmit={(values, { resetForm }) => {
                     if (!validateUser(values)) { // if the email does not exist, register them
                         resetForm();
                         createUser(values);
-                        console.log("register", values);
                         navigation.navigate("Welcome")
                     } else {
                         resetForm();
@@ -72,12 +70,8 @@ function RegisterScreen({ navigation }) {
             >
                 {({ values, handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <View style={styles.textInputContainer}>
+                        {/* Name field */}
                         <AppTextInput
-                            // icon="account"
-                            // placeholder="Full Name"
-                            // autoCapitalize="none"
-                            // autoCorrect={false}
-                            // onChangeText={userInputName => setUserName(userInputName)}
                             icon="account"
                             placeholder="Full Name"
                             autoCapitalize="none"
@@ -87,13 +81,9 @@ function RegisterScreen({ navigation }) {
                             onChangeText={handleChange("fullname")}
                         />
                         {touched.fullname && <AppText style={{ color: "red" }}>{errors.fullname}</AppText>}
+
+                        {/* Email field */}
                         <AppTextInput
-                            // icon="email"
-                            // placeholder="Email Address"
-                            // autoCapitalize="none"
-                            // autoCorrect={false}
-                            // keyboardType="email-address"
-                            // onChangeText={userInputEmail => setEmail(userInputEmail)}
                             icon="email"
                             placeholder="Email Address"
                             autoCapitalize="none"
@@ -105,13 +95,8 @@ function RegisterScreen({ navigation }) {
                         />
                         {touched.email && <AppText style={{ color: "red" }}>{errors.email}</AppText>}
 
+                        {/* Password field */}
                         <AppTextInput
-                            // icon="lock"
-                            // placeholder="Password"
-                            // autoCapitalize="none"
-                            // autoCorrect={false}
-                            // secureTextEntry={true}
-                            // onChangeText={userInputPassword => setPassword(userInputPassword)}
                             icon="lock"
                             placeholder="Password"
                             autoCapitalize="none"
@@ -123,6 +108,7 @@ function RegisterScreen({ navigation }) {
                         />
                         {touched.password && < AppText style={{ color: "red" }}>{errors.password}</AppText>}
 
+                        {/* Sign up button */}
                         <AppButton style={styles.button} title="Sign Up" color="secondaryColor" onPress={handleSubmit} />
                     </View >
                 )}

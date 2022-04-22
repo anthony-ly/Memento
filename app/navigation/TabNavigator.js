@@ -1,11 +1,12 @@
 import React from 'react';
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import AppColors from '../config/AppColors';
+import AppIcon from '../components/AppIcon';
+
+import AccountScreen from '../screens/AccountScreen';
 import MemoryScreen from '../screens/MemoryScreen';
 import NewMemoryScreen from '../screens/NewMemoryScreen';
-import AppColors from '../config/AppColors';
-import AccountScreen from '../screens/AccountScreen';
-import AppIcon from '../components/AppIcon';
 
 const AppTab = createBottomTabNavigator();
 

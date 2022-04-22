@@ -7,7 +7,6 @@ import AppIcon from '../components/AppIcon';
 import AppListItem from '../components/AppListItem';
 import AppScreen from '../components/AppScreen';
 import AppText from '../components/AppText';
-import AppButton from '../components/AppButton';
 
 
 function AccountScreen({ navigation, route }) {
@@ -18,6 +17,7 @@ function AccountScreen({ navigation, route }) {
                 <AppIcon name="logout" iconColor={AppColors.primaryColor} backgroundColor={AppColors.otherColor} />
             </TouchableOpacity>
 
+            {/* Header */}
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
                     name="camera"
@@ -25,11 +25,11 @@ function AccountScreen({ navigation, route }) {
                     color={AppColors.otherColor} />
                 <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={25}>Welcome back, {route.params.paramName}!</AppText>
             </View>
+
+            {/* Profile information */}
             <View style={styles.profileContainer}>
-                {/* <AppListItem image={route.params.paramImage} title={route.params.paramName} subtitle={route.params.paramEmail}/> */}
                 <AppListItem image={require("../assets/pfp.jpg")} title={route.params.paramName} subtitle={route.params.paramEmail} />
             </View>
-            {/* maybe put an image here?? */}
         </AppScreen >
     );
 }

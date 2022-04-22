@@ -2,6 +2,9 @@ export default class DataManager {
     static myInstance = null;
     userID = "";
 
+    /**
+     * Array containing the initial memories made by the initial users
+     */
     memories = [
         {
             userid: "1",
@@ -29,6 +32,9 @@ export default class DataManager {
         }
     ];
 
+    /**
+     * Array containing the data of the initial users
+     */
     users = [
         {
             id: "1",
@@ -44,12 +50,19 @@ export default class DataManager {
         },
     ];
 
+    /**
+     * Array containing the category data
+     */
     categories = [
         { label: "Family", value: 1, icon: "heart", backgroundColor: "black" },
         { label: "Friends", value: 2, icon: "account-group", backgroundColor: "black" },
         { label: "Nature", value: 3, icon: "tree", backgroundColor: "black" },
     ];
 
+    /**
+     * 
+     * @returns the instance of the DataManager, if one does not exist, it makes a new DataManager object
+     */
     static getInstance() {
         if (DataManager.myInstance == null) {
             DataManager.myInstance = new DataManager();
@@ -57,38 +70,75 @@ export default class DataManager {
         return this.myInstance;
     }
 
+    /**
+     * 
+     * @returns category data
+     */
     getCategories() {
         return this.categories;
     }
 
+    /**
+     * 
+     * @returns user data
+     */
     getUsers() {
-        // console.log("DM[getUser]", this.users);
         return this.users;
     }
 
+    /**
+     * 
+     * @returns the userid of the current user who is logged into the app
+     */
     getUserID() {
         return this.userID;
     }
 
+    /**
+     * 
+     * @param id - the id of the user who has logged int
+     * 
+     * assigns the value of id to userID
+     */
     setUserID(id) {
         this.userID = id;
     }
 
+    /**
+     * 
+     * @param user  - new user object
+     * 
+     * adds a new user object to the users array
+     */
     addUser(user) {
-        // console.log("DM[addUser]", user)
         this.users.push(user);
     }
 
-    // gets the memories for the corresponding user
+    /**
+     * 
+     * @param id - user id
+     * 
+     * @returns gets the memories for the corresponding user
+     */
     getMemories(id) {
         // error checking for null
         return this.memories.filter((memory) => memory.userid === id);
     }
 
+    /**
+     * 
+     * @returns memories data
+     */
     getAllMemories() {
         return this.memories;
     }
 
+    /**
+     * 
+     * @param id - memory id 
+     * 
+     * @returns the corresponding memory in memories that matches the param id
+     */
     getMemory(id) {
         return this.memories.filter((memory) => memory.memoryid === id);
     }
@@ -96,54 +146,45 @@ export default class DataManager {
     filterMemory(category, id) {
         let filter = this.memories.filter((memory) => memory.category === category);
         return filter.filter((memory) => memory.userid === this.userID);
-
-        // return this.memories.filter((memory) => memory.category === category);
     }
 
     addMemory(memory) {
         this.memories.push(memory);
     }
 
+    /**
+     * 
+     * @param {*} id - memory id
+     * @param {*} title - new memory title
+     * @param {*} subtitle - new memory subtitle
+     * @param {*} category - new memory category
+     */
     updateMemory(id, title, subtitle, category) {
         /**
          * 1. pass the new values to the function (some of these might be null/empty)
          * 2. check if they are empty, or in the case of category, if they are the same
          * 3. for the different ones/nonempty ones update their values according to the memory id
          */
-        // console.log("before:", this.memories);
-        // console.log("\n");
 
         let memoryIndex = this.memories.findIndex((memory => memory.memoryid == id));
 
-        // console.log("updating this:", this.memories[memoryIndex]);
-
         if (title !== '') {
-            // console.log("different title\n")
             this.memories[memoryIndex].title = title;
         }
         if (subtitle !== '') {
-            // console.log("different subtitle\n")
             this.memories[memoryIndex].subtitle = subtitle;
         }
         if (typeof category !== 'undefined' && this.memories[memoryIndex].category !== category.label) {
-            // console.log("different category\n")
             this.memories[memoryIndex].category = category.label;
         }
 
-        // console.log("after:", this.memories);
     }
 
-    removeMemory(memory) {
-        /**
-         * Search memories to find the corresponding memory that has the memoryid as the parameter id
-         * once that has been found, just remove it
-         */
-        this.memories = this.memories.filter((item) => item.memoryid !== memory.memoryid);
-        console.log("removemems:", memories, "\n\n\n");
-        // return this.memories.filter((stuff) => stuff.memoryid !== memory.memoryid);
-
-    }
-
+    /**
+     * 
+     * @param {*} newMemoryList - filtered memory list that does not contain a removed memory
+     * assigns value of newMemory list to memories
+     */
     removeMemory(newMemoryList) {
         this.memories = newMemoryList;
     }

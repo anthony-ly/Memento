@@ -4,14 +4,18 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import AppButton from '../components/AppButton';
 import AppColors from '../config/AppColors';
 import AppScreen from '../components/AppScreen';
-import AppTextInput from '../components/AppTextInput';
-import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
+import AppTextInput from '../components/AppTextInput';
+
 import DataManager from '../config/DataManager';
 
 
+/**
+ * error handling
+ */
 const schema = Yup.object().shape(
     {
         email: Yup.string().required().email().label("Email"),
@@ -25,7 +29,6 @@ const schema = Yup.object().shape(
 const validateUser = ({ email, password }) => {
     let data = DataManager.getInstance().getUsers();
     return (
-        // users.filter((user) => user.email === email && user.password === password).length > 0
         data.filter((user) => user.email === email && user.password === password).length > 0
     );
 }
@@ -34,12 +37,7 @@ const validateUser = ({ email, password }) => {
  * returns the logged in user's details based on their email address
  */
 const getUser = ({ email }) => {
-    // let commonData = DataManager.getInstance();
-    // let userID = getUser({email}).id;
-    // commonData.setUserID(userID);
-    // return users.find((user) => user.email === email);
     let data = DataManager.getInstance().getUsers();
-    console.log("login[getUser]:", data);
     return data.find((user) => user.email === email);
 }
 
@@ -55,7 +53,7 @@ const createUser = ({ email }) => {
 function LoginScreen({ navigation }) {
     return (
         <AppScreen style={styles.container}>
-            {/* top section */}
+            {/* Header */}
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
                     name="camera"
@@ -64,6 +62,7 @@ function LoginScreen({ navigation }) {
                 <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={50}>Login</AppText>
             </View>
 
+            {/* Login input fields */}
             <Formik
                 initialValues={{ email: '', password: '', }}
                 onSubmit={(values, { resetForm }) => {
@@ -75,7 +74,6 @@ function LoginScreen({ navigation }) {
                             params: {
                                 paramEmail: values.email,
                                 paramName: getUser(values).fullname
-                                // TODO get image as well
                             }
                         }
                         )

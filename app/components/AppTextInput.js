@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+
 import AppColors from '../config/AppColors';
+
 function AppTextInput({ icon, size = '80%', ...otherProps }) {
     return (
         <View style={[styles.container, { width: size }]}>
@@ -22,7 +24,6 @@ const styles = StyleSheet.create({
 
     textInput: {
         fontSize: 20,
-        // fontFamily: Platform.OS === 'android' ? "monospace" : "Cochin",
         color: "#000",
         marginLeft: 10,
         flex: 1,

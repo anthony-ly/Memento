@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-
 import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import AppColors from '../config/AppColors';
-import AppText from './AppText';
-import AppScreen from './AppScreen';
 import AppPickerItem from './AppPickerItem';
+import AppScreen from './AppScreen';
+import AppText from './AppText';
 
 function AppPicker({ data, icon, placeholder, selectedItem, onSelectItem }) {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <>
+            {/* Default view for the AppPicker (before it is pressed */}
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
                 <View style={styles.container}>
                     {icon && <MaterialCommunityIcons name={icon} size={24} />}
@@ -20,6 +20,7 @@ function AppPicker({ data, icon, placeholder, selectedItem, onSelectItem }) {
                 </View>
             </TouchableWithoutFeedback>
 
+            {/* Modal for the AppPicker that lists data in a FlatList */}
             <Modal visible={modalVisible} animationType="slide">
                 <AppScreen>
                     <Button title="Close" onPress={() => setModalVisible(false)}></Button>

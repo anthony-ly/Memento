@@ -21,10 +21,10 @@ export default class DataManager {
         },
         {
             userid: "2",
-            memoryid: 4,
-            title: "Family",
-            subtitle: "date",
-            image: require("../assets/Book1Cover.jpg"),
+            memoryid: 3,
+            title: "Friends",
+            subtitle: "With my favourite people.",
+            image: require("../assets/park.jpg"),
             category: "Family"
         }
     ];
@@ -142,5 +142,9 @@ export default class DataManager {
         console.log("removemems:", memories, "\n\n\n");
         // return this.memories.filter((stuff) => stuff.memoryid !== memory.memoryid);
 
+    }
+
+    removeMemory(newMemoryList) {
+        this.memories = newMemoryList;
     }
 }

@@ -39,7 +39,7 @@ function MemoryScreen({ navigation }) {
 
         // then get the new memories and assign using set memories
         const newMemoryList = memories.filter(item => item.memoryid !== memory.memoryid); // instead of deleting from memorylist
-
+        commonData.removeMemory(newMemoryList);
         // we delete from data manager
         setMemories(newMemoryList);
         // console.log("new", newMemoryList[0])
@@ -48,10 +48,7 @@ function MemoryScreen({ navigation }) {
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             setMemories(getMemory());
-            // alert('Screen is focused');
-            // The screen is focused
-            // Call any action
-            // console.log("bruh");
+
         });
 
         // Return the function to unsubscribe from the event so it gets removed on unmount

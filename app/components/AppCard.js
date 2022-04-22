@@ -84,7 +84,6 @@ function AppCard({ id, title, subtitle, image, onSwipeLeft }) {
                     {/* Update memory info button */}
                     <View style={styles.button}>
                         <AppButton title="Update Memory" color="secondaryColor" onPress={() => {
-                            console.log(id, newTitle, newSubtitle, newCategory);
                             let commonData = DataManager.getInstance();
                             commonData.updateMemory(id, newTitle, newSubtitle, newCategory);
                             setModalVisible(false);

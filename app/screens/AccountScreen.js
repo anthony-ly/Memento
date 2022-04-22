@@ -13,17 +13,17 @@ import AppButton from '../components/AppButton';
 function AccountScreen({ navigation, route }) {
     return (
         <AppScreen style={styles.container}>
-
-            {/* <AppButton title="logout" onPress={() => navigation.navigate('Welcome')}></AppButton> */}
+            {/* Log out button */}
             <TouchableOpacity style={styles.logout} onPress={() => navigation.navigate('Welcome')}>
                 <AppIcon name="logout" iconColor={AppColors.primaryColor} backgroundColor={AppColors.otherColor} />
             </TouchableOpacity>
+
             <View style={styles.welcomeContainer}>
                 <MaterialCommunityIcons
                     name="camera"
                     size={60}
                     color={AppColors.otherColor} />
-                <AppText>Welcome back, {route.params.paramName}!</AppText>
+                <AppText style={{ fontWeight: "bold", marginTop: 20 }} size={25}>Welcome back, {route.params.paramName}!</AppText>
             </View>
             <View style={styles.profileContainer}>
                 {/* <AppListItem image={route.params.paramImage} title={route.params.paramName} subtitle={route.params.paramEmail}/> */}
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     welcomeContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 150,
     },
     profileContainer: {
         marginTop: 50,

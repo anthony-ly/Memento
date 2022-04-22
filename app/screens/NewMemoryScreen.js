@@ -65,7 +65,7 @@ function NewMemoryScreen({ navigation }) {
         // console.log(user);
 
         const memories = commonData.getMemories(user);
-        const memoryID = commonData.getAllMemories().length + 1; // TODO set as random number
+        const memoryID = commonData.getAllMemories().length + Math.floor(Math.random() * 1000);
         const newMemory = {
             userid: user,
             memoryid: memoryID,

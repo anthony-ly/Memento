@@ -46,10 +46,9 @@ function AppCard({ id, title, subtitle, category, image, onSwipeLeft, navigation
 
             {/* CODE FOR UPDATING MEMORY DATA */}
             <Modal visible={modalVisible} animationType="slide">
-                <AppScreen>
+                <AppScreen style={styles.form}>
                     <Button title="Close" onPress={() => setModalVisible(false)}></Button>
-                    {/* <AppText>{title}-{subtitle}-{category}</AppText> */}
-                    <AppText>Update Memory</AppText>
+                    {/* <AppText style={{ fontWeight: "bold", marginTop: 20, marginBottom: 20 }} size={30}>Update Memory</AppText> */}
                     <AppTextInput
                         icon="camera"
                         placeholder="New Title"
@@ -112,6 +111,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     button: {
+        marginTop: 20,
         flexDirection: 'row',
         justifyContent: "center",
         alignContent: "center",

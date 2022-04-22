@@ -77,6 +77,23 @@ function NewMemoryScreen({ navigation }) {
         commonData.addMemory(newMemory);
     }
 
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // setMemories(getMemory());
+            // alert('Screen is focused');
+            // The screen is focused
+            // Call any action
+            setTitle("");
+            setSubTitle("");
+            setCategory("");
+            setImage("");
+        });
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, []);
+
+    console.log("image", image);
+
     return (
         <AppScreen style={styles.container}>
             {/* Title input */}
